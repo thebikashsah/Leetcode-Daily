@@ -40,3 +40,44 @@ vector<int> findClosestElements(vector<int>& arr, int k, int x) {
 
 
 	   // Approach - 2 -> 2-Pointers
+
+
+	    vector<int> findClosestElements(vector<int>& arr, int k, int x) {
+
+            // 2- Pointers approach
+
+            // We come from both the sides and decide which pointer to move
+            // at the end we get a window containing k elements which are closest to x
+
+            int n=arr.size();
+
+            int i=0;
+            int j=n-1;
+
+            // size of the window= j-i+1
+
+            while(j-i+1>k){  // O(N-k)
+
+                    if(abs(x-arr[j])>=abs(x-arr[i])){
+                            j--;
+                    }else{
+                            i++;
+                    }
+            }
+
+            // Now we have a window starting at i and ending at j containing k elements
+
+            vector<int> ans;
+
+            for(int start=i;start<=j;start++){ // O(k)
+                    ans.push_back(arr[start]);
+            }
+            // TC -> O(N) (Approximately)
+            // SC -> O(1) (No extra space besides the ans array)
+            return ans;
+
+    }
+
+	    // Approach 3 -> Binary Search
+	   
+
