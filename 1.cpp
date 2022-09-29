@@ -81,3 +81,43 @@ vector<int> findClosestElements(vector<int>& arr, int k, int x) {
 	    // Approach 3 -> Binary Search
 	   
 
+	    vector<int> findClosestElements(vector<int>& arr, int k, int x) {
+
+            int n=arr.size();
+
+            vector<int> ans;
+
+            int low=0;
+            int high=n-1;
+
+            int pos=0;
+            while(low<=high){
+                    int mid=(low+high)/2;
+
+                    if(arr[mid]<=x){
+                            low=mid+1;
+                    }else{
+                            high=mid-1;
+                    }
+            }
+            pos=low;
+
+            int l=pos-k<0?0:pos-k;
+            int r=pos+k>=n?n-1:pos+k;
+
+            while(r-l+1!=k){
+                    if(abs(arr[l]-x)>abs(arr[r]-x)){
+                            l++;
+                    }else{
+                            r--;
+                    }
+            }
+
+            for(int i=l;i<=r;i++){
+                    ans.push_back(arr[i]);
+            }
+            // sort(ans.begin(),ans.end());
+            // TC -> O(LogN + 2K+1)
+            return ans;
+
+    }
